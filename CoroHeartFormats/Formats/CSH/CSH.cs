@@ -7,7 +7,17 @@ namespace CoroHeart.Formats.CSH
 {
     public class CSH
     {
-        const int MAGIC = 0x00687363;
+        const string MAGIC = "\0hsc";
+
+        static public bool isCSH(Stream data)
+        {
+            byte[] buffer = new byte[4];
+            data.Read(buffer, 0, 4);
+            data.Seek(0, SeekOrigin.Begin);
+            int value =BitConverter.ToInt32(buffer,0);
+            byte[] magicBytes = Encoding.UTF8.GetBytes(MAGIC);
+            return value == BitConverter.ToInt32(magicBytes,0);
+        }
 
         static public void Load(Stream data, Stream output)
         {
@@ -17,17 +27,8 @@ namespace CoroHeart.Formats.CSH
             {
                 using (writer)
                 {
-                    int value = Tools.BigEndianToLittleEndian(reader.ReadInt32());
-                    bool correctFormat = value == CSH.MAGIC;
-                    if (!correctFormat)
-                    {
-                        throw new InvalidDataException();
-                    }
-                    writer.Write(Tools.BigEndianToLittleEndian(value));
-                    while (reader.BaseStream.Position < 0x80)
-                    {
-                        reader.ReadInt32();
-                    }
+                    reader.BaseStream.Seek(0, SeekOrigin.Begin);
+                    writer.BaseStream.Seek(0, SeekOrigin.Begin);
                     ZLIB.Load(reader.BaseStream, writer.BaseStream);
                 }
             }

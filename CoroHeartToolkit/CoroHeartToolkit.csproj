@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DeathEndFormats\CoroHeartFormats.csproj" />
+    <ProjectReference Include="..\CoroHeartFormats\CoroHeartFormats.csproj" />
   </ItemGroup>
 
 </Project>

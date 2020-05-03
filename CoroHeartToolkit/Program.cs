@@ -11,24 +11,45 @@ namespace CoroHeart.Toolkit
         {
             if (args.Length < 1)
             {
-                Console.WriteLine("Drag and drop your .csh or your .dat on DeathEndToolkit.exe then try again !");
+                Console.WriteLine("Drag and drop your .csh or your .dat on CoroHeartToolkit.exe to extract them !");
                 Console.ReadLine();
                 return;
             }
-            foreach (string FileName in args)
+            string[] files = null;
+            if (Directory.Exists(args[0]))
+            {
+                files = Directory.GetFiles(args[0]);
+            }
+            else
+            {
+                files = args;
+            }
+            foreach (string FileName in files)
             {
                 FileStream file = File.OpenRead(FileName);
+                Console.WriteLine("Opening " + FileName);
                 using (file)
                 {
-                    if (FileName.EndsWith(".csh"))
+                    if (CSH.isCSH(file))
                     {
-                        FileStream outputFile = File.Create(FileName + ".extracted");
+                        DirectoryInfo info = Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\" + Path.GetFileNameWithoutExtension(FileName));
+                        FileStream outputFile = File.Create(info.FullName + "\\" + Path.GetFileName(FileName) + ".extracted");
                         using (outputFile)
                         {
-                            CSH.Load(file, outputFile);
+                            try
+                            {
+                                CSH.Load(file, outputFile);
+                                Console.WriteLine(FileName + " Exported successfully !");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("An exception occurred while loading " + FileName + " contact SeleDreams to determine what happened.");
+                                Console.WriteLine(ex.GetType().Name + " : " + ex.Message);
+                            }
+
                         }
                     }
-                    else if (FileName.EndsWith(".dat"))
+                    else if (GDAT.isGDAT(file))
                     {
                         using (GDAT gdat = GDAT.Load(file))
                         {
@@ -62,11 +83,12 @@ namespace CoroHeart.Toolkit
                     }
                     else
                     {
-                        Console.WriteLine("Incorrect argument, the valid file types are .dat and .csh");
+                        Console.WriteLine("Incorrect file, the valid file types are .dat and .csh");
                     }
                 }
-                Console.ReadLine();
             }
+            Console.WriteLine("All files finished extracting !");
+            Console.ReadLine();
         }
     }
 }

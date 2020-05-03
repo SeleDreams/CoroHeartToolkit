@@ -6,6 +6,15 @@ namespace CoroHeart.Formats.GDAT
 {
     public class GDAT : IDisposable
     {
+        public static bool isGDAT(Stream data)
+        {
+            byte[] buffer = new byte[4];
+            data.Read(buffer, 0, 4);
+            data.Seek(0, SeekOrigin.Begin);
+            int value = BitConverter.ToInt32(buffer, 0);
+            byte[] magicBytes = Encoding.UTF8.GetBytes(MAGIC);
+            return value == BitConverter.ToInt32(magicBytes, 0);
+        }
         public static GDAT Load(Stream data)
         {
             GDAT GDatData = new GDAT();
