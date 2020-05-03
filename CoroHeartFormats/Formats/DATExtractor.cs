@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DeathEndFormats.Formats
+namespace CoroHeart.Formats
 {
     class DATExtractor
     {

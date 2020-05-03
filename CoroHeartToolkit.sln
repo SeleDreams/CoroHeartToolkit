@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeathEndToolkit", "DeathEndToolkit\DeathEndToolkit.csproj", "{0DDAD26A-CCBC-48D8-A9EA-E3F15730FB28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoroHeartToolkit", "CoroHeartToolkit\CoroHeartToolkit.csproj", "{0DDAD26A-CCBC-48D8-A9EA-E3F15730FB28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeathEndFormats", "DeathEndFormats\DeathEndFormats.csproj", "{B95CC3AA-F7B8-4907-9775-E766BEE2215A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoroHeartFormats", "CoroHeartFormats\CoroHeartFormats.csproj", "{B95CC3AA-F7B8-4907-9775-E766BEE2215A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

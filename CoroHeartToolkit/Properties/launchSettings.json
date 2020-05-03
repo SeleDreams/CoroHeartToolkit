@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DeathEndToolkit": {
+      "commandName": "Project",
+      "commandLineArgs": "\"D:\\Games\\steamapps\\common\\Megadimension Neptunia VIIR\\resource\\masterWin64\\GxArchivedFile002.dat\""
+    }
+  }
+}

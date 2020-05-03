@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 using System.IO.Compression;
 
-namespace DeathEndFormats.Formats
+namespace CoroHeart.Formats
 {
     public class ZLIB
     {
@@ -12,6 +12,9 @@ namespace DeathEndFormats.Formats
 
         public static void Load(Stream data, Stream output)
         {
+            data.Seek(data.Position + 0x80, SeekOrigin.Begin);
+            output.Seek(0, SeekOrigin.Begin);
+
             BinaryReader reader = new BinaryReader(data, Encoding.UTF8, true);
             using (reader)
             {

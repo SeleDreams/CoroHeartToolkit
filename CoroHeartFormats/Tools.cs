@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 using System.IO.Compression;
 
-namespace DeathEndFormats
+namespace CoroHeart
 {
     public static class Tools
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-namespace DeathEndFormats.Formats.CSH
+namespace CoroHeart.Formats.CSH
 {
     public class CSH
     {

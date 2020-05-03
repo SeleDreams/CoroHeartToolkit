@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DeathEndFormats.Formats.GDAT
+namespace CoroHeart.Formats.GDAT
 {
     public class GDATFile
     {

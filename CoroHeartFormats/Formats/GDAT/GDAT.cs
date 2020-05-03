@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
-namespace DeathEndFormats.Formats.GDAT
+namespace CoroHeart.Formats.GDAT
 {
     public class GDAT : IDisposable
     {
@@ -38,33 +39,60 @@ namespace DeathEndFormats.Formats.GDAT
             Array.Reverse(myArr);
             return new string(myArr);
         }
+        public static string CleanString(string dirtyString)
+        {
+            HashSet<char> removeChars = new HashSet<char>(" ?&^$#@!()+-,:;<>’\'-_*");
+            StringBuilder result = new StringBuilder(dirtyString.Length);
+            foreach (char c in dirtyString)
+                if (!removeChars.Contains(c)) // prevent dirty chars
+                    result.Append(c);
+            return result.ToString();
+        }
+
+        public static bool isZLIB(byte[] data)
+        {
+            byte[] magic = new byte[4];
+            Array.Copy(data, 0x80, magic, 0, 4);
+            return ReverseString(Encoding.UTF8.GetString(magic)) == "ZLIB";
+        }
+
         public void Export(int id, string path)
         {
             GDATFile data = Files[id];
+            Console.WriteLine("start export");
             Data.Seek(data.Offset, SeekOrigin.Begin);
             using (BinaryReader reader = new BinaryReader(Data, Encoding.UTF8, true))
             {
-                byte[] bytes = reader.ReadBytes(4);
-                string fileFormat = Encoding.UTF8.GetString(bytes);
+                int MAGIC = reader.ReadInt32();
+                string fileFormat = ReverseString(Encoding.UTF8.GetString(BitConverter.GetBytes(MAGIC)));
+                string fileName = data.Offset + "." + string.Concat(fileFormat.Split(Path.GetInvalidFileNameChars()));
+                Console.WriteLine(fileName);
                 reader.BaseStream.Seek(data.Offset, SeekOrigin.Begin);
-                using (FileStream fs = File.Create(path + "." + ReverseString(fileFormat).Replace('\0', '.')))
+                byte[] buffer = reader.ReadBytes((int)data.Length);
+                reader.BaseStream.Seek(data.Offset, SeekOrigin.Begin);
+                string finalPath = path + fileName;
+                using (FileStream fs = File.Create(finalPath))
                 {
                     using (BinaryWriter writer = new BinaryWriter(fs))
                     {
-                        reader.BaseStream.Seek(data.Offset, SeekOrigin.Begin);
-                       writer.BaseStream.Seek(0, SeekOrigin.Begin);
-                       while (reader.BaseStream.Position < data.Offset + 0x80)
+                        if (isZLIB(buffer))
                         {
-                            // writer.Write(reader.ReadByte());
-                            reader.ReadByte();
+                            Console.WriteLine(fileName + " is a zlib archive, extracting...");
+                            reader.BaseStream.Seek(data.Offset, SeekOrigin.Begin);
+                            ZLIB.Load(Data, writer.BaseStream);
                         }
-                      //  Array.Reverse(bytes);
-                       // writer.Write(bytes);
-                        ZLIB.Load(Data, writer.BaseStream);
+                        else
+                        {
+                            Console.WriteLine(fileName + " is an unknown file type, it will be exported as is");
+                            reader.BaseStream.Seek(data.Offset, SeekOrigin.Begin);
+                            writer.Write(reader.ReadBytes((int)data.Length));
+                        }
                     }
                 }
             }
         }
+
+
 
         public void Dispose()
         {
