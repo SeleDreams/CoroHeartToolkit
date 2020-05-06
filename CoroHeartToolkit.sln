@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoroHeartToolkit", "CoroHea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoroHeartFormats", "CoroHeartFormats\CoroHeartFormats.csproj", "{B95CC3AA-F7B8-4907-9775-E766BEE2215A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GDATRepacker", "GDATRepacker\GDATRepacker.csproj", "{755B2937-036A-4177-8972-45EAF40DB8F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoroHeartToolkitGUI", "CoroHeartToolkitGUI\CoroHeartToolkitGUI.csproj", "{D1AFCEC9-67F9-4E63-B98A-D2851F63B60E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{B95CC3AA-F7B8-4907-9775-E766BEE2215A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B95CC3AA-F7B8-4907-9775-E766BEE2215A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B95CC3AA-F7B8-4907-9775-E766BEE2215A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{755B2937-036A-4177-8972-45EAF40DB8F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{755B2937-036A-4177-8972-45EAF40DB8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{755B2937-036A-4177-8972-45EAF40DB8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{755B2937-036A-4177-8972-45EAF40DB8F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1AFCEC9-67F9-4E63-B98A-D2851F63B60E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1AFCEC9-67F9-4E63-B98A-D2851F63B60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1AFCEC9-67F9-4E63-B98A-D2851F63B60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1AFCEC9-67F9-4E63-B98A-D2851F63B60E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

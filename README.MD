@@ -1,5 +1,5 @@
 # CoroHeartToolkit
-CoroHeart toolkit is a tool that allows to export assets from games from Compile Hearts made with the Orochi Engine such as Death End Re;Quest and Megadimension Neptunia VIIR
+CoroHeart toolkit is a tool that allows to export assets from Compile Hearts games  made with the Orochi Engine such as Death End Re;Quest and Megadimension Neptunia VIIR
 
 # Usage
 To use it, you need the .net core runtime, you can download it here : 

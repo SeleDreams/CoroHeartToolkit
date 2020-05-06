@@ -1,12 +1,73 @@
 ﻿using System;
 using System.IO;
-using CoroHeart.Formats.GDAT;
-using CoroHeart.Formats.CSH;
-
+using CoroHeartFormats;
+using Kaitai;
 namespace CoroHeart.Toolkit
 {
     class Program
     {
+
+        static void OpenZLIB(FileStream file,string FileName)
+        {
+            string currentDir = AppDomain.CurrentDomain.BaseDirectory;
+            string croppedFilename = Path.GetFileNameWithoutExtension(FileName);
+            DirectoryInfo info = Directory.CreateDirectory(currentDir + "\\" + croppedFilename);
+            string outputPath = info.FullName + "\\" + Path.GetFileName(FileName) + "." + ZLIB.GetFileType(file);
+            FileStream outputFile = File.Create(outputPath);
+            using (outputFile)
+            {
+                try
+                {
+                    ZLIB.Load(file, outputFile);
+                    Console.WriteLine(FileName + " Exported successfully !");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("An exception occurred while loading " + FileName);
+                    Console.WriteLine(ex.GetType().Name + " : " + ex.Message);
+                }
+            }
+        }
+
+        static void OpenGdat(FileStream file, string FileName)
+        {
+            Gdat gdat = Gdat.FromStream(file);
+            gdat.ReadData();
+            string currentDir = AppDomain.CurrentDomain.BaseDirectory;
+            string croppedFilename = Path.GetFileNameWithoutExtension(FileName);
+            DirectoryInfo info = Directory.CreateDirectory(currentDir + "\\" + croppedFilename); 
+            int SuccessfulExports = 0;
+            for (int i = 0; i < gdat.FileCount; i++)
+            {
+                try
+                {
+                    Console.WriteLine("Writing file " + i);
+                    byte[] data = gdat.Files[i].Body;
+                    string magic = gdat.Files[i].Magic;
+                    string fileFormat = "." + string.Concat(magic.Split(Path.GetInvalidFileNameChars()));
+                    File.WriteAllBytes(info.FullName + "\\" + i + fileFormat, data) ;
+                    SuccessfulExports++;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("An exception occurred while loading " + FileName);
+                    Console.WriteLine(ex.GetType().Name + " : " + ex.Message);
+                }
+            }
+            if (gdat.FileCount == 0)
+            {
+                Console.WriteLine("The file count is empty");
+            }
+            else if (SuccessfulExports == gdat.FileCount)
+            {
+                Console.WriteLine("All files of " + FileName + " got succesfully exported !");
+            }
+            else
+            {
+                Console.WriteLine(SuccessfulExports + " out of " + gdat.FileCount + " got successfully exported from " + FileName);
+            }
+        }
+
         static void Main(string[] args)
         {
             if (args.Length < 1)
@@ -15,7 +76,8 @@ namespace CoroHeart.Toolkit
                 Console.ReadLine();
                 return;
             }
-            string[] files = null;
+
+            string[] files;
             if (Directory.Exists(args[0]))
             {
                 files = Directory.GetFiles(args[0]);
@@ -30,64 +92,16 @@ namespace CoroHeart.Toolkit
                 Console.WriteLine("Opening " + FileName);
                 using (file)
                 {
-                    if (CSH.isCSH(file))
+                    if (ZLIB.isZLIB(file))
                     {
-                        DirectoryInfo info = Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\" + Path.GetFileNameWithoutExtension(FileName));
-                        FileStream outputFile = File.Create(info.FullName + "\\" + Path.GetFileName(FileName) + ".extracted");
-                        using (outputFile)
-                        {
-                            try
-                            {
-                                CSH.Load(file, outputFile);
-                                Console.WriteLine(FileName + " Exported successfully !");
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine("An exception occurred while loading " + FileName + " contact SeleDreams to determine what happened.");
-                                Console.WriteLine(ex.GetType().Name + " : " + ex.Message);
-                            }
-
-                        }
-                    }
-                    else if (GDAT.isGDAT(file))
-                    {
-                        using (GDAT gdat = GDAT.Load(file))
-                        {
-
-                            DirectoryInfo info = Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\" + Path.GetFileNameWithoutExtension(FileName));
-                            int SuccessfulExports = 0;
-                            for (int i = 0; i < gdat.FileCount; i++)
-                            {
-                                try
-                                {
-                                    gdat.Export(i, info.FullName + "\\");
-                                    SuccessfulExports++;
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine("An exception occurred while loading " + FileName + " contact SeleDreams to determine what happened.");
-                                    Console.WriteLine(ex.GetType().Name + " : " + ex.Message);
-                                }
-                            }
-                            if (SuccessfulExports == gdat.FileCount)
-                            {
-                                Console.WriteLine("All files of " + FileName + " got succesfully exported !");
-                            }
-                            else
-                            {
-                                Console.WriteLine(SuccessfulExports + " out of " + gdat.FileCount + " got successfully exported from " + FileName);
-                            }
-
-                        }
-
+                        OpenZLIB(file, FileName);
                     }
                     else
                     {
-                        Console.WriteLine("Incorrect file, the valid file types are .dat and .csh");
+                        OpenGdat(file, FileName);
                     }
                 }
             }
-            Console.WriteLine("All files finished extracting !");
             Console.ReadLine();
         }
     }
