@@ -70,20 +70,26 @@ namespace Kaitai
 
             private bool f_body;
             private byte[] _body;
+
+            byte[] InitBody()
+            {
+                if (f_body)
+                    return _body;
+                long _pos = m_io.Pos;
+                m_io.Seek(FileOffset);
+                magic = new byte[4];
+                m_io.Read(magic, 0, 4);
+                m_io.Seek(m_io.Pos - 4);
+                _body = m_io.ReadBytes(FileLength);
+                m_io.Seek(_pos);
+                f_body = true;
+                return _body;
+            }
             public byte[] Body
             {
                 get
                 {
-                    if (f_body)
-                        return _body;
-                    long _pos = m_io.Pos;
-                    m_io.Seek(FileOffset);
-                    magic = BitConverter.GetBytes(m_io.ReadS4be());
-                    m_io.Seek(m_io.Pos - 4);
-                    _body = m_io.ReadBytes(FileLength);
-                    m_io.Seek(_pos);
-                    f_body = true;
-                    return _body;
+                    return InitBody();
                 }
                 set
                 {
@@ -101,7 +107,7 @@ namespace Kaitai
 
             public string Magic
             {
-                get { return Encoding.UTF8.GetString(magic); }
+                get { if (magic == null) { InitBody(); } return Encoding.UTF8.GetString(magic); }
             }
             public uint FileOffset
             {

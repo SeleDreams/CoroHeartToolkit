@@ -3,7 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using CoroHeartToolkitGUI.ViewModels;
 using CoroHeartToolkitGUI.Views;
-
+using CoroHeartToolkitGUI.Services;
 namespace CoroHeartToolkitGUI
 {
     public class App : Application
@@ -15,15 +15,14 @@ namespace CoroHeartToolkitGUI
 
         public override void OnFrameworkInitializationCompleted()
         {
+            base.OnFrameworkInitializationCompleted();
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = new MainWindowViewModel(),
-                };
+                var db = new Database();
+                desktop.MainWindow = new MainWindow();
+                desktop.MainWindow.DataContext = new MainWindowViewModel(desktop.MainWindow, db);
             }
 
-            base.OnFrameworkInitializationCompleted();
         }
     }
 }

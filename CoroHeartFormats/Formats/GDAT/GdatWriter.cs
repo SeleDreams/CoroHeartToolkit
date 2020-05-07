@@ -32,6 +32,7 @@ namespace Kaitai
             }
             return outputGdat;
         }
+
         public static Gdat Create (Stream output)
         {
             Gdat gdat = new Gdat(new KaitaiStream(output));
@@ -93,7 +94,7 @@ namespace Kaitai
             }
             private void _recalculateOffsets(uint newLength)
             {
-              /*  int currentID = m_root.Files.FindIndex(f => f == this) + 1;
+                int currentID = m_root.Files.FindIndex(f => f == this) + 1;
                 int change = (int)newLength - (int)_fileLength;
                 for (; currentID < m_root.FileCount; currentID++)
                 {
@@ -104,7 +105,7 @@ namespace Kaitai
                 if (onOffsetRecalculation != null)
                 {
                     onOffsetRecalculation(this);
-                }*/
+                }
             }
 
             public void Write()

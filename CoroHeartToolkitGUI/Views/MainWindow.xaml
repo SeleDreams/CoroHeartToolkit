@@ -1,17 +1,31 @@
-﻿<Window xmlns="https://github.com/avaloniaui"
+﻿<Window Background="WhiteSmoke" xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:CoroHeartToolkitGUI.ViewModels;assembly=CoroHeartToolkitGUI"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="500"
         x:Class="CoroHeartToolkitGUI.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="CoroHeartToolkitGUI">
-
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+        Title="CoroHeartToolkitGUI"
+        MinWidth="600"
+        MinHeight="300">
+  <Grid RowDefinitions="20,*" ShowGridLines="False">
+    <ContentControl Content="{Binding TopMenu}" Grid.Column="0" />
+    <Grid Grid.Row="1" ShowGridLines="False" Background="LightGray">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="5"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="5"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="5"/>
+        <ColumnDefinition MinWidth="100" Width="100*"/>
+        <ColumnDefinition Width="10"/>
+        <ColumnDefinition MinWidth="300" Width="300*"/>
+        <ColumnDefinition Width="5"/>
+      </Grid.ColumnDefinitions>
+      <ContentControl  Background="LightGray" Content="{Binding FileList}" Grid.Column="1" Grid.Row="1" />
+      <ContentControl Background="LightGray" Content="{Binding FileProperties}" Focusable="False"  Grid.Column="3" Grid.Row="1"/>
+    </Grid>
+  </Grid>
 </Window>

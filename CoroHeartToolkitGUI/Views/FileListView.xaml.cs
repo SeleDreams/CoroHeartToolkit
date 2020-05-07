@@ -1,28 +1,20 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using CoroHeartToolkitGUI.Services;
 using CoroHeartToolkitGUI.ViewModels;
-using System.Collections.Generic;
 
 namespace CoroHeartToolkitGUI.Views
 {
-    public class MainWindow : Window
+    public class FileListView : UserControl
     {
-        public MainWindow()
+        public FileListView()
         {
-            InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
+            this.InitializeComponent();
         }
-
-       
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
         }
-
     }
 }
