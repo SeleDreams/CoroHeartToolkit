@@ -16,8 +16,6 @@ namespace CoroHeartToolkitGUI.ViewModels
             MenuItems = items;
         }
 
-
-        private Window window;
         public IReadOnlyList<TopMenuItem> MenuItems { get; set; }
 
         public ReactiveCommand<Window, Unit> OpenCommand { get; }

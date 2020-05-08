@@ -9,9 +9,9 @@
         Title="CoroHeartToolkitGUI"
         MinWidth="400"
         MinHeight="300">
-  <Grid x:Name="Root" RowDefinitions="20,*" ShowGridLines="False">
-    <ContentControl Content="{Binding TopMenu}" Grid.Column="0" />
-    <Grid x:Name="MainContainer" Grid.Row="1" ShowGridLines="False" Background="LightGray">
+  <Grid x:Name="Root" RowDefinitions="2,20,*" ShowGridLines="False">
+    <ContentControl Content="{Binding TopMenu}" Grid.Row="1" Grid.Column="0" />
+    <Grid x:Name="MainContainer" Grid.Row="2" ShowGridLines="False" Background="LightGray">
       <Grid.RowDefinitions>
         <RowDefinition Height="5"/>
         <RowDefinition Height="*"/>

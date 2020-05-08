@@ -41,7 +41,7 @@ namespace CoroHeartToolkitGUI.ViewModels
             };
             IClassicDesktopStyleApplicationLifetime classicDesktopLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
             string[] results = await dialog.ShowAsync(classicDesktopLifetime.MainWindow);
-            if (results.Length < 1 || !File.Exists(results[0]))
+            if (results == null || (results.Length < 1 || !File.Exists(results[0])))
             {
                 return;
             }
