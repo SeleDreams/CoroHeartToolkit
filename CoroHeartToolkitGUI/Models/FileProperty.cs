@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoroHeartToolkitGUI.Services
+namespace CoroHeartToolkitGUI.Models
 {
     public class FileProperty
     {

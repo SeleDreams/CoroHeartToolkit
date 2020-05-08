@@ -7,11 +7,11 @@
         x:Class="CoroHeartToolkitGUI.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="CoroHeartToolkitGUI"
-        MinWidth="600"
+        MinWidth="400"
         MinHeight="300">
-  <Grid RowDefinitions="20,*" ShowGridLines="False">
+  <Grid x:Name="Root" RowDefinitions="20,*" ShowGridLines="False">
     <ContentControl Content="{Binding TopMenu}" Grid.Column="0" />
-    <Grid Grid.Row="1" ShowGridLines="False" Background="LightGray">
+    <Grid x:Name="MainContainer" Grid.Row="1" ShowGridLines="False" Background="LightGray">
       <Grid.RowDefinitions>
         <RowDefinition Height="5"/>
         <RowDefinition Height="*"/>
@@ -21,11 +21,11 @@
         <ColumnDefinition Width="5"/>
         <ColumnDefinition MinWidth="100" Width="100*"/>
         <ColumnDefinition Width="10"/>
-        <ColumnDefinition MinWidth="300" Width="300*"/>
+        <ColumnDefinition MinWidth="200" Width="300*"/>
         <ColumnDefinition Width="5"/>
       </Grid.ColumnDefinitions>
       <ContentControl  Background="LightGray" Content="{Binding FileList}" Grid.Column="1" Grid.Row="1" />
-      <ContentControl Background="LightGray" Content="{Binding FileProperties}" Focusable="False"  Grid.Column="3" Grid.Row="1"/>
+      <ContentControl Background="White" Content="{Binding FileProperties}" Focusable="False"  Grid.Column="3" Grid.Row="1"/>
     </Grid>
   </Grid>
 </Window>

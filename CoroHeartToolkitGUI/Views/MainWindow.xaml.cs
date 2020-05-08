@@ -1,8 +1,8 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using CoroHeartToolkitGUI.Services;
 using CoroHeartToolkitGUI.ViewModels;
+using System;
 using System.Collections.Generic;
 
 namespace CoroHeartToolkitGUI.Views
@@ -16,8 +16,6 @@ namespace CoroHeartToolkitGUI.Views
             this.AttachDevTools();
 #endif
         }
-
-       
 
         private void InitializeComponent()
         {

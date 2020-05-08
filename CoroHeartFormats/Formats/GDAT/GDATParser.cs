@@ -5,8 +5,18 @@ using System.Text;
 
 namespace Kaitai
 {
-    public partial class Gdat : KaitaiStruct
+    public partial class Gdat : KaitaiStruct, IDisposable
     {
+        public void Dispose()
+        {
+            foreach(var file in Files)
+            {
+                if (file.Body != null)
+                {
+                    file.Body = null;
+                }
+            }
+        }
         public static Gdat FromFile(string fileName)
         {
             return new Gdat(new KaitaiStream(fileName));
@@ -93,10 +103,18 @@ namespace Kaitai
                 }
                 set
                 {
-                    f_body = true;
-                    _body = value;
-                    _recalculateOffsets((uint)_body.Length);
-                    _fileLength = (uint)_body.Length;
+                    if (value != null)
+                    {
+                        f_body = true;
+                        _body = value;
+                        _recalculateOffsets((uint)_body.Length);
+                        _fileLength = (uint)_body.Length;
+                    }
+                    else
+                    {
+                        f_body = false;
+                        _body = null;
+                    }
                 }
             }
             private byte[] magic;

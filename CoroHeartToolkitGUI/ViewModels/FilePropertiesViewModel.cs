@@ -1,4 +1,4 @@
-﻿using CoroHeartToolkitGUI.Services;
+﻿using CoroHeartToolkitGUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,11 +8,11 @@ namespace CoroHeartToolkitGUI.ViewModels
 {
     public class FilePropertiesViewModel : ViewModelBase
     {
-        public FilePropertiesViewModel(FileProperty[] properties)
+        public FilePropertiesViewModel()
         {
-            Properties = properties;
+            Properties = new ObservableCollection<FileProperty>();
         }
 
-        public FileProperty[] Properties { get; set; }
+        public ObservableCollection<FileProperty> Properties { get; set; }
     }
 }

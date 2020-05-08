@@ -2,17 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:services="clr-namespace:CoroHeartToolkitGUI.Services"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CoroHeartToolkitGUI.Views.FilePropertiesView">
-  <UserControl.DataTemplates>
-      <DataTemplate DataType="{x:Type services:FileProperty}">
-        <Grid RowDefinitions="*" ColumnDefinitions="100*,4,100*" ShowGridLines="False" >
-        <TextBlock Text="{Binding Name}"  Grid.Column="0" HorizontalAlignment="Left"/>
-        <TextBlock  Text="{Binding Content}" Grid.Column="2" HorizontalAlignment="Right"/>
-        </Grid>
-      </DataTemplate>
-  </UserControl.DataTemplates>
-  <ListBox Items = "{Binding Properties}" />
-
+  <DataGrid Focusable="False" Items="{Binding Properties}" CanUserResizeColumns="True" CanUserReorderColumns="False" CanUserSortColumns="False">
+    <DataGrid.Columns>
+      <DataGridTextColumn IsReadOnly="True" Header="Property Name" MinWidth="100" Width="100*" Binding="{Binding Name}"/>
+      <DataGridTextColumn IsReadOnly="True" Header= "Property Content" MinWidth="100" Width="100*" Binding="{Binding Content}"/>
+    </DataGrid.Columns>
+  </DataGrid>
 </UserControl>

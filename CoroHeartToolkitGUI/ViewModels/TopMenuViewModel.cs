@@ -1,22 +1,26 @@
-﻿using ReactiveUI;
-using System;
+﻿using Avalonia.Controls;
+using ReactiveUI;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Reactive;
-using System.Text;
+using CoroHeartToolkitGUI.Models;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 
 namespace CoroHeartToolkitGUI.ViewModels
 {
     public class TopMenuViewModel : ViewModelBase
     {
-        public TopMenuViewModel(IReadOnlyList<TopMenuItemViewModel> items)
+        public TopMenuViewModel(IReadOnlyList<TopMenuItem> items)
         {
+            
             MenuItems = items;
         }
 
-        public IReadOnlyList<TopMenuItemViewModel> MenuItems { get; set; }
 
-        public ReactiveCommand<Unit, Unit> OpenCommand { get; }
+        private Window window;
+        public IReadOnlyList<TopMenuItem> MenuItems { get; set; }
+
+        public ReactiveCommand<Window, Unit> OpenCommand { get; }
         public ReactiveCommand<Unit, Unit> CloseCommand { get; }
         public ReactiveCommand<string, Unit> OpenRecentCommand { get; }
     }
