@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using ReactiveUI;
 using Avalonia.Controls;
 using CoroHeartToolkitGUI.Models;
+using CoroHeartToolkitGUI.Views;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia;
 
 namespace CoroHeartToolkitGUI.ViewModels
 {
@@ -16,6 +19,14 @@ namespace CoroHeartToolkitGUI.ViewModels
             FileList.PropertiesViewModel = FileProperties;
             _initTopMenuItems();
             TopMenu = new TopMenuViewModel(TopMenuItems);
+        }
+
+        void TriggerAboutWindow()
+        {
+            AboutWindow window = new AboutWindow();
+            IClassicDesktopStyleApplicationLifetime classicDesktopLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
+            
+            window.ShowDialog(classicDesktopLifetime.MainWindow);
         }
 
         private void _initTopMenuItems()
@@ -41,16 +52,13 @@ namespace CoroHeartToolkitGUI.ViewModels
                     },
                     new TopMenuItem()
                     {
-                        Header = "Edit",
+                        Header = "Help",
                         Items = new TopMenuItem[]
                     {
                         new TopMenuItem()
                         {
-                            Header = "Undo"
-                        },
-                        new TopMenuItem()
-                        {
-                            Header = "Redo"
+                            Header = "About",
+                            Command= ReactiveCommand.Create(TriggerAboutWindow)
                         }
                     } } };
         }

@@ -3,3 +3,6 @@ bin
 obj
 Debug
 Release
+*.zip
+publish
+Publish

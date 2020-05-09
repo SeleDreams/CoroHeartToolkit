@@ -7,8 +7,11 @@
         x:Class="CoroHeartToolkitGUI.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="CoroHeartToolkitGUI"
+        Height="500"
+        Width="700"
         MinWidth="400"
-        MinHeight="300">
+        MinHeight="300"
+        WindowStartupLocation="CenterScreen">
   <Grid x:Name="Root" RowDefinitions="2,20,*" ShowGridLines="False">
     <ContentControl Content="{Binding TopMenu}" Grid.Row="1" Grid.Column="0" />
     <Grid x:Name="MainContainer" Grid.Row="2" ShowGridLines="False" Background="LightGray">

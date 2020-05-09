@@ -1,0 +1,13 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="100"
+        x:Class="CoroHeartToolkitGUI.Views.AboutWindow" 
+        Title="About" WindowStartupLocation="CenterScreen"  Background="White" Width="250" Height="150" CanResize="False">
+  <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+    <TextBlock Text="CoroHeart Toolkit" TextAlignment="Center"/>
+    <TextBlock Text="Version 0.1 - Dev" TextAlignment="Center"/>
+    <TextBlock Text="2020 - SeleDreams" TextAlignment="Center"/>
+  </StackPanel>
+</Window>

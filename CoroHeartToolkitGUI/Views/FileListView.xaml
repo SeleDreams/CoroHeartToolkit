@@ -6,7 +6,7 @@
           <Template>
             <ContextMenu>
               <MenuItem Header="Export" Command="{Binding $parent[4].DataContext.ExportFile}" />
-              <MenuItem Header="Replace (Not implemented yet.)"/>
+              <MenuItem Header="Replace (Not implemented yet.)" IsEnabled="False"/>
             </ContextMenu>
           </Template>
         </Setter>

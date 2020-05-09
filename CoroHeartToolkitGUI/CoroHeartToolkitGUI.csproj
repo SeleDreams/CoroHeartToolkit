@@ -19,12 +19,28 @@
     <None Remove="Release\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Remove="Views\AboutWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\AboutWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.10" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.10"/>
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.10" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.10" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.10"/>
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\AboutWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoroHeartFormats\CoroHeartFormats.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

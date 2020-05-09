@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CoroHeartToolkitGUI.Views.FilePropertiesView">
-  <DataGrid Focusable="False" Items="{Binding Properties}" CanUserResizeColumns="True" CanUserReorderColumns="True" CanUserSortColumns="False">
+  <DataGrid SelectedIndex="0" Focusable="False" Items="{Binding Properties}" CanUserResizeColumns="True" CanUserReorderColumns="True" CanUserSortColumns="False">
     <DataGrid.Columns>
       <DataGridTextColumn IsReadOnly="True" Header="Property" MinWidth="100" Width="100*" Binding="{Binding Property}"/>
       <DataGridTextColumn IsReadOnly="True" Header= "Value" MinWidth="100" Width="100*" Binding="{Binding Value}"/>
