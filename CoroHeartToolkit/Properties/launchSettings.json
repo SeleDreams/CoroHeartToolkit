@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "DeathEndToolkit": {
-      "commandName": "Project",
-      "commandLineArgs": "\"D:\\Games\\steamapps\\common\\DeathEndReQuest\\resource\\masterWin64\\GxArchivedFile057.dat\""
-    }
-  }
-}
