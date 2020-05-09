@@ -3,11 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoroHeartToolkit", "CoroHeartToolkit\CoroHeartToolkit.csproj", "{0DDAD26A-CCBC-48D8-A9EA-E3F15730FB28}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoroHeartFormats", "CoroHeartFormats\CoroHeartFormats.csproj", "{B95CC3AA-F7B8-4907-9775-E766BEE2215A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GDATRepacker", "GDATRepacker\GDATRepacker.csproj", "{755B2937-036A-4177-8972-45EAF40DB8F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoroHeartToolkitGUI", "CoroHeartToolkitGUI\CoroHeartToolkitGUI.csproj", "{D1AFCEC9-67F9-4E63-B98A-D2851F63B60E}"
 EndProject
@@ -17,18 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0DDAD26A-CCBC-48D8-A9EA-E3F15730FB28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0DDAD26A-CCBC-48D8-A9EA-E3F15730FB28}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0DDAD26A-CCBC-48D8-A9EA-E3F15730FB28}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0DDAD26A-CCBC-48D8-A9EA-E3F15730FB28}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B95CC3AA-F7B8-4907-9775-E766BEE2215A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B95CC3AA-F7B8-4907-9775-E766BEE2215A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B95CC3AA-F7B8-4907-9775-E766BEE2215A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B95CC3AA-F7B8-4907-9775-E766BEE2215A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{755B2937-036A-4177-8972-45EAF40DB8F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{755B2937-036A-4177-8972-45EAF40DB8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{755B2937-036A-4177-8972-45EAF40DB8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{755B2937-036A-4177-8972-45EAF40DB8F7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D1AFCEC9-67F9-4E63-B98A-D2851F63B60E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D1AFCEC9-67F9-4E63-B98A-D2851F63B60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1AFCEC9-67F9-4E63-B98A-D2851F63B60E}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -8,6 +8,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using ReactiveUI;
+using System.Windows.Input;
+using System.Reactive;
+using CoroHeartToolkitGUI.Models;
 
 namespace CoroHeartToolkitGUI.ViewModels
 {
@@ -21,11 +25,11 @@ namespace CoroHeartToolkitGUI.ViewModels
         public void OnSelectionChange(object sender, SelectionChangedEventArgs e)
         {
             Console.WriteLine("Selection Changed");
-
         }
 
         public async void OpenFile()
         {
+            CloseFile();
             OpenFileDialog dialog = new OpenFileDialog()
             {
                 AllowMultiple = false,
@@ -39,13 +43,39 @@ namespace CoroHeartToolkitGUI.ViewModels
                 },
                 Title = "Select the DAT file you want to open"
             };
+
             IClassicDesktopStyleApplicationLifetime classicDesktopLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
+            
             string[] results = await dialog.ShowAsync(classicDesktopLifetime.MainWindow);
             if (results == null || (results.Length < 1 || !File.Exists(results[0])))
             {
                 return;
             }
+            _currentGDAT = results[0];
             PopulateList(results[0]);
+        }
+
+        public async void ExportFile(){
+            Console.WriteLine(_selectedIndex);
+            string extension = FileProperties.GetExtension(GDAT.Files[_selectedIndex].Magic);
+            SaveFileDialog dialog = new SaveFileDialog(){
+                Title = "Where do you want to save this file !",
+                DefaultExtension = extension,
+                InitialFileName = _selectedIndex.ToString() + "." + extension
+            };
+             IClassicDesktopStyleApplicationLifetime classicDesktopLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
+            
+            string results = await dialog.ShowAsync(classicDesktopLifetime.MainWindow);
+            if (results == null){
+                return;
+            }
+            else{
+                Console.WriteLine("Test");
+                GDATFile file = GDAT.Files[_selectedIndex];
+                using (FileStream s = File.Create(results)){
+                    file.Export(s);
+                }
+            }
         }
 
         public void CloseFile()
@@ -65,16 +95,7 @@ namespace CoroHeartToolkitGUI.ViewModels
             Files.Clear();
             for (int i = 0; i < files.Count; i++)
             {
-                char[] magic = Encoding.UTF8.GetChars(GDAT.Files[i].Magic);
-                Array.Reverse(magic);
-                string hexOffset = $"[0x{files[i].Offset:X8}]";
-                string reversedMagic = string.Concat(new string(magic).Split(Path.GetInvalidFileNameChars()));
-                if (string.IsNullOrEmpty(reversedMagic))
-                {
-                    Files.Add($"{hexOffset} {i}");
-                    continue;
-                }
-                Files.Add($"{hexOffset} {i}.{reversedMagic}");
+                    Files.Add($"{i}");
             }
         }
 
@@ -84,10 +105,24 @@ namespace CoroHeartToolkitGUI.ViewModels
             set
             {
                 _selectedFile = value;
-                Console.WriteLine("Value was set");
             }
         }
+
+        public int SelectedIndex{
+            get => _selectedIndex;
+            set{
+                _selectedIndex = value;
+                if (GDAT != null && GDAT.Files.Count > 0){
+                    PropertiesViewModel.UpdateProperties(GDAT.Files[_selectedIndex]);
+                }
+                
+            }
+        }
+        
+        private int _selectedIndex;
         private string _selectedFile;
+
+        private string _currentGDAT;
         public ObservableCollection<string> Files { get; set; }
         public FilePropertiesViewModel PropertiesViewModel { get; set; }
         public ListBox List { get; set; }

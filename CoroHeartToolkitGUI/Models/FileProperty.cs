@@ -4,14 +4,23 @@ using System.Text;
 
 namespace CoroHeartToolkitGUI.Models
 {
-    public class FileProperty
+    public class FileProperties
     {
-        public FileProperty(string name, string content)
+        public FileProperties(string property = "", string value = "")
         {
-            Name = name;
-            Content = content;
+            this.Property = property;
+            Value = value;
         }
-        public string Name { get; set; }
-        public string Content { get; set; }
+        public static string GetExtension(byte[] originalMagic){
+            byte[] magic =  new byte[originalMagic.Length];
+            Array.Copy(originalMagic,magic,originalMagic.Length);
+            Array.Reverse(magic);
+            string strMagic = Encoding.UTF8.GetString(magic);
+            strMagic = string.Concat(strMagic.Split('\\','\0'));
+            string formattedMagic = strMagic.ToUpperInvariant();
+            return formattedMagic;
+        }
+        public string Property { get; set; }
+        public string Value { get; set; }
     }
 }

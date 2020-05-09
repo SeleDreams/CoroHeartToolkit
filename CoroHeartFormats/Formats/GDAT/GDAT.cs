@@ -44,7 +44,7 @@ namespace CoroHeartFormats
                    _reader.BaseStream.Seek(offset, SeekOrigin.Begin);
                     byte[] magic = _reader.ReadBytes(4);
                     _reader.BaseStream.Seek(pos, SeekOrigin.Begin);
-                    GDATFile file = new GDATFile(i,offset ,length ,magic ,this);
+                    GDATFile file = new GDATFile(i,offset ,length ,magic ,this,_reader);
                     files.Add(file);
                 }
                 _files = files;
